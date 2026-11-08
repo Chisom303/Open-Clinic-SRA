@@ -7,5 +7,5 @@ contributors are clinic staff, not developers), and keep discussion focused on
 making the tool better and more accurate.
 
 Report unacceptable behavior privately to the maintainers at
-**[MAINTAINER EMAIL — replace before publishing]**. All reports will be reviewed and handled
+**Aloziechisom23@gmail.com**. All reports will be reviewed and handled
 confidentially.

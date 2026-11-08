@@ -11,7 +11,7 @@ not be accepted.
 
 Please **do not** open a public issue for security problems.
 
-Email **[MAINTAINER EMAIL — replace before publishing]** with:
+Email **Aloziechisom23@gmail.com** with:
 
 - a description of the issue and its impact,
 - steps to reproduce, and

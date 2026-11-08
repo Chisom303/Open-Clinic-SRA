@@ -2,6 +2,8 @@
 
 **A free, open-source HIPAA Security Risk Assessment for small clinics.**
 
+   **Try it:** https://chisom303.github.io/open-clinic-sra/
+
 Built for the practice manager at a 1–10 provider clinic, not for security
 engineers. Plain-language questions, a prioritized fix-it plan, and a report you
 can keep on file.
