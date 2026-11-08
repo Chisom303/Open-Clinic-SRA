@@ -9,16 +9,27 @@
     "node": ">=20"
   },
   "scripts": {
+    "content": "node scripts/build-content.mjs",
+    "dev": "npm run content && vite",
+    "build": "npm run content && vite build",
+    "preview": "vite preview",
     "validate": "node scripts/validate.mjs",
     "test": "node --test test/*.test.mjs",
     "check": "npm run validate && npm test"
   },
-  "keywords": ["hipaa", "security-risk-assessment", "healthcare", "compliance", "small-practice"],
+  "keywords": [
+    "hipaa",
+    "security-risk-assessment",
+    "healthcare",
+    "compliance",
+    "small-practice"
+  ],
   "dependencies": {
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "vite": "^6.4.5"
   }
 }

@@ -95,7 +95,8 @@ export function scoreAssessment(questions, answers) {
         answer: a,
         risk,
         residual,
-        severity: q.critical && a === ANSWERS.NO ? 'critical' : severity(risk),
+        // Severity reflects the risk that remains, so labels match the priority order.
+        severity: q.critical && a === ANSWERS.NO ? 'critical' : severity(residual),
         critical: Boolean(q.critical),
         citation: q.citation,
         why: q.why,

@@ -4,3 +4,4 @@ dist/
 *.log
 # Never commit real assessment exports
 *.assessment.json
+src/generated/

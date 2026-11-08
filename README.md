@@ -35,10 +35,10 @@ This project aims to be:
 | Question schema + validation | ✅ |
 | Question bank (first 32 questions) | ✅ draft — needs expert review |
 | Scoring engine + tests | ✅ |
-| Browser questionnaire UI | ⏳ next |
-| PDF report | ⏳ |
+| Browser questionnaire UI + results | ✅ |
+| Save/load assessment file | ✅ |
+| PDF report | ⏳ next |
 | ePHI asset inventory section | ⏳ |
-| Export/import for year-over-year comparison | ⏳ |
 
 ## Repository layout
 
@@ -49,6 +49,7 @@ content/
   schema.json          # JSON Schema every question must satisfy
 src/
   scoring.mjs          # scoring engine (pure functions, no I/O)
+  app/                 # browser app: screens, styles, local-only storage
 scripts/
   validate.mjs         # validates all content against the schema
 test/
@@ -63,9 +64,18 @@ Requires Node.js 20+.
 
 ```bash
 npm install
+npm run dev        # run the app locally at http://localhost:5173
 npm run validate   # check every question against the schema
-npm test           # run scoring engine tests
+npm test           # run the tests
+npm run build      # build the static site into dist/
 ```
+
+## Publishing the app for free
+
+The included GitHub Actions workflow deploys the app to GitHub Pages on every
+push to `main`. In your repository, go to **Settings → Pages** and set
+**Source** to **GitHub Actions**. The site will appear at
+`https://<your-username>.github.io/<repo-name>/`.
 
 ## Contributing
 
