@@ -1,0 +1,27 @@
+# Assessment sections in display order.
+# `file` is relative to content/questions/.
+sections:
+  - id: administrative
+    title: Administrative Safeguards
+    description: Who is responsible for security, how risk is managed, and how your team is trained.
+    file: administrative.yaml
+  - id: physical
+    title: Physical Safeguards
+    description: Protecting your office, workstations, and devices from physical access, loss, or theft.
+    file: physical.yaml
+  - id: technical
+    title: Technical Safeguards
+    description: Logins, encryption, audit logs, and how data is protected on computers and networks.
+    file: technical.yaml
+  - id: organizational
+    title: Vendors and Business Associates
+    description: Agreements with outside companies that handle patient information for you.
+    file: organizational.yaml
+  - id: policies
+    title: Policies and Incident Response
+    description: What your practice does when something goes wrong, including breaches.
+    file: policies.yaml
+  - id: documentation
+    title: Documentation
+    description: Keeping the records HIPAA requires, for as long as it requires them.
+    file: documentation.yaml

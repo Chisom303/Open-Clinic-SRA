@@ -1,0 +1,32 @@
+section: organizational
+questions:
+  - id: ORG-001
+    text: Do you have a signed Business Associate Agreement (BAA) with every outside company that handles patient information for you?
+    help: Common examples include your EHR vendor, billing company, IT provider, cloud backup, email provider, answering service, and shredding company.
+    citation: 45 CFR 164.308(b)(1)
+    implementation: standard
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require written verification, at least every 12 months, that business associates have deployed required safeguards.
+    likelihood: 2
+    impact: 3
+    critical: true
+    allow_na: false
+    why: Sharing patient data with a vendor without a BAA is itself a HIPAA violation and has led to enforcement penalties.
+    fix: List every vendor that touches patient data, request a BAA from each one, and store signed copies together.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: ORG-002
+    text: Do you keep a current list of all vendors with BAAs, including when each agreement was signed?
+    help: A simple spreadsheet works. Review it when you add or drop a vendor.
+    citation: 45 CFR 164.314(a)
+    implementation: standard
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Without a list, new vendors get added without agreements and expired relationships keep data access.
+    fix: Create a vendor list with contact, service, BAA date, and renewal date, and review it every 12 months.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07

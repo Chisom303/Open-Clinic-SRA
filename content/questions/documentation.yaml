@@ -1,0 +1,29 @@
+section: documentation
+questions:
+  - id: DOC-001
+    text: Are your HIPAA security policies and procedures written down and available to the staff who need them?
+    help: A shared folder or binder is fine, as long as staff know where to find it.
+    citation: 45 CFR 164.316(a)
+    implementation: standard
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Unwritten policies cannot be followed consistently or shown to an auditor.
+    fix: Collect your policies in one place, share the location with staff, and note it in training.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: DOC-002
+    text: Do you keep HIPAA security documentation (policies, risk analyses, training records) for at least 6 years?
+    help: The 6 years is counted from when the document was created or last in effect, whichever is later.
+    citation: 45 CFR 164.316(b)(2)(i)
+    implementation: required
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: During an investigation, you must be able to produce records showing what you did and when.
+    fix: Store all HIPAA documentation in a backed-up location with a 6-year minimum retention rule.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07

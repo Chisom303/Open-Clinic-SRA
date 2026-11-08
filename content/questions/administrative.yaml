@@ -1,0 +1,164 @@
+section: administrative
+questions:
+  - id: ADM-001
+    text: Has your practice completed a written security risk analysis in the last 12 months?
+    help: A risk analysis identifies where patient data is stored, what could go wrong, and how likely and harmful each problem would be. Completing this tool counts as a starting point.
+    citation: 45 CFR 164.308(a)(1)(ii)(A)
+    implementation: required
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require a written risk analysis reviewed at least every 12 months, with specific required contents.
+    likelihood: 3
+    impact: 3
+    critical: true
+    allow_na: false
+    why: The absence of a risk analysis is one of the findings HHS cites most often in HIPAA enforcement actions.
+    fix: Complete this assessment in full, save the report, and calendar a review every 12 months and after any major change (new EHR, new office, new vendor).
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: ADM-002
+    text: Do you have a written plan to fix the risks your risk analysis found, with owners and deadlines?
+    help: This is called a risk management plan. The remediation plan in this tool's report can serve as one if you assign owners and track it.
+    citation: 45 CFR 164.308(a)(1)(ii)(B)
+    implementation: required
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Finding risks without acting on them leaves the practice exposed and shows regulators the risks were known but not addressed.
+    fix: Use the remediation plan in your report. Assign each item an owner and due date, and review progress monthly.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: ADM-003
+    text: Is one specific person officially named as your Security Officer?
+    help: In small practices this is often the office manager. It must be a named individual, documented in writing.
+    citation: 45 CFR 164.308(a)(2)
+    implementation: standard
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Without a named owner, security tasks fall through the cracks and no one is accountable.
+    fix: Designate a Security Officer in a signed memo, and list their responsibilities.
+    fix_within_days: 7
+    last_reviewed: 2026-11-07
+
+  - id: ADM-004
+    text: Do you have a written policy for disciplining staff who violate your security policies?
+    help: This is called a sanction policy. It should be in your employee handbook or HIPAA policy manual.
+    citation: 45 CFR 164.308(a)(1)(ii)(C)
+    implementation: required
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Staff need to know there are consequences for misuse, and HIPAA requires sanctions to be applied and documented.
+    fix: Add a sanction policy to your handbook describing consequences from retraining to termination, and have staff acknowledge it.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: ADM-005
+    text: Does someone regularly review EHR access logs or reports for unusual activity?
+    help: Most EHR systems can show who looked at which records. A monthly spot-check is a reasonable starting point for a small practice.
+    citation: 45 CFR 164.308(a)(1)(ii)(D)
+    implementation: required
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Snooping by staff and compromised accounts are usually caught only by reviewing activity logs.
+    fix: Ask your EHR vendor how to run an access report. Have the Security Officer review it monthly and keep a dated note of each review.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: ADM-006
+    text: When someone leaves the practice, are all of their accounts and access removed on their last day?
+    help: This includes the EHR, email, practice management system, building keys or badges, and any shared passwords they knew.
+    citation: 45 CFR 164.308(a)(3)(ii)(C)
+    implementation: addressable
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require access to be terminated within one hour after employment ends.
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Former employees with working logins are a common source of unauthorized access to patient records.
+    fix: Create an offboarding checklist covering every system and key, and complete it on the employee's last day.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: ADM-007
+    text: Do staff only get access to the patient information they need for their job?
+    help: For example, front desk staff may need scheduling but not full clinical notes. Many EHRs support role-based access.
+    citation: 45 CFR 164.308(a)(4)(ii)(B)
+    implementation: addressable
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Limiting access reduces the damage from a mistake, a curious employee, or a stolen password.
+    fix: Review each user's EHR role with your vendor and remove permissions that are not needed for that person's job.
+    fix_within_days: 60
+    last_reviewed: 2026-11-07
+
+  - id: ADM-008
+    text: Do all workforce members complete HIPAA security training when hired and at least once a year?
+    help: Include owners, providers, front desk, billing, and temporary staff. Keep a sign-in sheet or certificate for each person.
+    citation: 45 CFR 164.308(a)(5)(i)
+    implementation: standard
+    likelihood: 3
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Phishing and human error are among the most common causes of healthcare data breaches.
+    fix: Choose a training course (HHS provides free materials), train everyone, and keep dated records of completion.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: ADM-009
+    text: Is antivirus or anti-malware software installed and updating automatically on every computer?
+    help: This includes front desk PCs, provider laptops, and any computer used to access the EHR from home.
+    citation: 45 CFR 164.308(a)(5)(ii)(B)
+    implementation: addressable
+    likelihood: 3
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Ransomware is a leading cause of healthcare breaches and can shut down a practice for days or weeks.
+    fix: Install reputable endpoint protection on every device and confirm it updates automatically. Your IT provider can do this centrally.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: ADM-010
+    text: Do you back up patient data automatically, and have you tested restoring from a backup in the last 12 months?
+    help: Many cloud EHRs back up data for you. Ask your vendor for proof, and test restoring any data you keep locally.
+    citation: 45 CFR 164.308(a)(7)(ii)(A)
+    implementation: required
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require the ability to restore critical systems within 72 hours, plus regular backup testing.
+    likelihood: 2
+    impact: 3
+    critical: true
+    allow_na: false
+    why: Without working backups, ransomware or hardware failure can permanently destroy patient records.
+    fix: Confirm automatic backups for every system that stores ePHI, keep at least one copy offline or immutable, and test a restore and document the result.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: ADM-011
+    text: Do you have a written plan for keeping the practice running if your systems are unavailable (e.g., outage, ransomware, fire)?
+    help: This is called a contingency or disaster recovery plan. It can be short, but it should say who does what and how you will see patients.
+    citation: 45 CFR 164.308(a)(7)(ii)(B)
+    implementation: required
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Practices without a plan often lose days of revenue and patient access during an outage.
+    fix: Write a one- to two-page plan covering emergency contacts, how to access backups, paper workflows, and how to restore systems.
+    fix_within_days: 60
+    last_reviewed: 2026-11-07

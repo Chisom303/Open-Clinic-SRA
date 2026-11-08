@@ -1,0 +1,46 @@
+section: policies
+questions:
+  - id: POL-001
+    text: Do you have a written plan for responding to a security incident, such as a hacked account, ransomware, or a lost laptop?
+    help: It should say who to call, how to contain the problem, and how to document what happened.
+    citation: 45 CFR 164.308(a)(6)(ii)
+    implementation: required
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require written incident response plans that are tested regularly.
+    likelihood: 2
+    impact: 3
+    critical: true
+    allow_na: false
+    why: Without a plan, practices lose critical time during an incident and often miss legal notification deadlines.
+    fix: Write a one-page incident response plan with emergency contacts (IT provider, EHR vendor, cyber insurer, attorney) and the first steps to take.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: POL-002
+    text: Do you know how to determine whether an incident is a reportable breach, and the deadlines for notifying patients and HHS?
+    help: Breaches generally must be reported to affected individuals without unreasonable delay and no later than 60 days after discovery. Additional rules apply to HHS and media notice.
+    citation: 45 CFR 164.404
+    implementation: required
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Missing breach notification deadlines can add penalties on top of the breach itself.
+    fix: Add the breach risk assessment steps and notification deadlines to your incident response plan, and identify an attorney to call.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: POL-003
+    text: Have you reviewed your security policies and safeguards in the last 12 months, or after any major change?
+    help: Major changes include a new EHR, new location, new vendor, or a security incident.
+    citation: 45 CFR 164.308(a)(8)
+    implementation: standard
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Policies that are never revisited drift out of step with how the practice actually works.
+    fix: Schedule an annual policy review alongside your risk analysis, and document the date and any changes made.
+    fix_within_days: 90
+    last_reviewed: 2026-11-07

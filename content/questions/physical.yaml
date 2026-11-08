@@ -1,0 +1,74 @@
+section: physical
+questions:
+  - id: PHY-001
+    text: Are areas where patient records or servers are kept locked or otherwise restricted to authorized staff?
+    help: This covers server closets, file rooms, and offices with records. A locked door with controlled keys is usually enough for small practices.
+    citation: 45 CFR 164.310(a)(1)
+    implementation: standard
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Unrestricted physical access makes theft of devices and records easy.
+    fix: Lock rooms that contain servers, network equipment, or records, and keep a list of who has keys.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: PHY-002
+    text: Are computer screens positioned or filtered so patients and visitors cannot see patient information?
+    help: Front desk monitors are the usual problem. Privacy screen filters are inexpensive.
+    citation: 45 CFR 164.310(c)
+    implementation: required
+    likelihood: 2
+    impact: 1
+    critical: false
+    allow_na: false
+    why: Visible screens expose patient information to anyone waiting nearby.
+    fix: Reposition monitors away from public areas or add privacy filters.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: PHY-003
+    text: Do you have written rules for how computers and devices that access patient data may be used?
+    help: For example, no personal use of EHR workstations, no unapproved software, and screens locked when stepping away.
+    citation: 45 CFR 164.310(b)
+    implementation: required
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Clear rules prevent risky habits like installing unknown software on clinical computers.
+    fix: Add a short workstation use policy to your HIPAA manual and include it in staff training.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: PHY-004
+    text: Before disposing of computers, drives, phones, or copiers, do you securely wipe or destroy the storage?
+    help: Copiers and fax machines often contain hard drives. Use a certified destruction service and keep the certificate.
+    citation: 45 CFR 164.310(d)(2)(i)
+    implementation: required
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Discarded devices that still contain patient data have led to reportable breaches.
+    fix: Use a certified data destruction vendor (and sign a BAA with them), and keep certificates of destruction.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: PHY-005
+    text: Do you keep a list of every computer, laptop, phone, tablet, and storage device that can access patient data?
+    help: Include personally owned phones that staff use for work email or EHR apps.
+    citation: 45 CFR 164.310(d)(1)
+    implementation: standard
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require a written technology asset inventory and network map, updated at least every 12 months.
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: You cannot protect devices you don't know about, and lost devices are a frequent cause of breaches.
+    fix: Create a simple spreadsheet listing each device, its user, location, and whether it is encrypted. Update it whenever devices change.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07

@@ -1,0 +1,51 @@
+name: Question change
+description: Suggest a new question, or a fix to an existing one. No coding needed.
+labels: [content]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the question bank! Please **do not include any patient information** in this issue.
+  - type: input
+    id: question_id
+    attributes:
+      label: Question ID
+      description: e.g. TEC-004. Leave blank if you're proposing a new question.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of change?
+      options:
+        - New question
+        - Wording is unclear
+        - Citation is wrong or missing
+        - Risk weights seem wrong
+        - Remediation advice could be better
+        - Regulatory change
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What should change, and why?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Regulation (45 CFR 164.xxx) or official HHS/NIST guidance that supports the change.
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your background (optional)
+      options:
+        - Practice manager / clinic staff
+        - Compliance professional
+        - Attorney
+        - IT / MSP
+        - Developer
+        - Other

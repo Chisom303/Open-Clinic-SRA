@@ -1,0 +1,24 @@
+{
+  "name": "open-clinic-sra",
+  "version": "0.1.0",
+  "description": "Free, open-source HIPAA Security Risk Assessment for small clinics. Runs entirely in the browser.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm run validate && npm test"
+  },
+  "keywords": ["hipaa", "security-risk-assessment", "healthcare", "compliance", "small-practice"],
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

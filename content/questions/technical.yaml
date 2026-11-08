@@ -1,0 +1,139 @@
+section: technical
+questions:
+  - id: TEC-001
+    text: Does every person have their own username and password for the EHR and other systems, with no shared logins?
+    help: A shared front desk login is a common shortcut, but it makes it impossible to know who did what.
+    citation: 45 CFR 164.312(a)(2)(i)
+    implementation: required
+    likelihood: 3
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Shared accounts hide who accessed records and make it impossible to remove one person's access.
+    fix: Create individual accounts for every user and disable shared logins.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: TEC-002
+    text: Do computers lock or log out automatically after a period of inactivity?
+    help: 10–15 minutes is common for clinical workstations. This can be set in Windows/macOS and usually in the EHR too.
+    citation: 45 CFR 164.312(a)(2)(iii)
+    implementation: addressable
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Unattended, logged-in computers let anyone walking by view or change patient records.
+    fix: Set an automatic screen lock on every workstation and enable the EHR's session timeout.
+    fix_within_days: 7
+    last_reviewed: 2026-11-07
+
+  - id: TEC-003
+    text: Are all laptops, phones, tablets, and USB drives that store or access patient data encrypted?
+    help: Windows BitLocker and macOS FileVault are built in. Phones are usually encrypted when a passcode is set.
+    citation: 45 CFR 164.312(a)(2)(iv)
+    implementation: addressable
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would make encryption of ePHI at rest required, with limited exceptions.
+    likelihood: 3
+    impact: 3
+    critical: true
+    allow_na: true
+    why: A lost or stolen unencrypted device is generally a reportable breach. Properly encrypted devices generally qualify for the breach notification safe harbor.
+    fix: Turn on BitLocker or FileVault on every computer, require passcodes on phones, and stop using unencrypted USB drives.
+    fix_within_days: 7
+    last_reviewed: 2026-11-07
+
+  - id: TEC-004
+    text: Is multi-factor authentication (MFA) required for email and for any access to the EHR from outside the office?
+    help: MFA means a code from a phone app or text in addition to a password. Most cloud EHRs and email providers support it.
+    citation: 45 CFR 164.312(d)
+    implementation: standard
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would explicitly require MFA for access to systems containing ePHI, with limited exceptions.
+    likelihood: 3
+    impact: 3
+    critical: true
+    allow_na: false
+    why: Stolen passwords from phishing are a leading way attackers get into healthcare email and EHR accounts. MFA blocks most of these attacks.
+    fix: Turn on MFA for email, the EHR, remote access, and any admin accounts. Start with email — it is usually the fastest win.
+    fix_within_days: 7
+    last_reviewed: 2026-11-07
+
+  - id: TEC-005
+    text: Is patient information encrypted when sent by email or transferred over the internet?
+    help: Use your email provider's encryption feature or a secure messaging portal. Websites and patient portals should use HTTPS.
+    citation: 45 CFR 164.312(e)(2)(ii)
+    implementation: addressable
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would make encryption of ePHI in transit required, with limited exceptions.
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Unencrypted email can be intercepted or misdirected, exposing patient information.
+    fix: Enable your email provider's encryption option (or a secure messaging tool) and train staff on when to use it.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: TEC-006
+    text: Do your systems keep logs of who accessed or changed patient records?
+    help: Most certified EHRs do this automatically. Confirm with your vendor that audit logging is turned on.
+    citation: 45 CFR 164.312(b)
+    implementation: standard
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Without audit logs, you cannot investigate a suspected breach or show what happened.
+    fix: Confirm audit logging is enabled in the EHR and any system storing ePHI, and know how to pull a report.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: TEC-007
+    text: Are operating systems and software on all computers updated with security patches at least monthly?
+    help: Turn on automatic updates for Windows/macOS and browsers. Computers running unsupported systems (like Windows 7) should be replaced.
+    citation: NIST SP 800-66r2 (Security Rule implementation guidance)
+    implementation: guidance
+    proposed_rule_2025:
+      affected: true
+      note: The proposal would require patching within specified timeframes and regular vulnerability scanning.
+    likelihood: 3
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Attackers routinely exploit known, unpatched vulnerabilities to install ransomware.
+    fix: Turn on automatic updates on every device and replace any computer running an operating system that no longer receives security updates.
+    fix_within_days: 14
+    last_reviewed: 2026-11-07
+
+  - id: TEC-008
+    text: Is your office Wi-Fi password-protected with WPA2 or WPA3, with a separate guest network for patients?
+    help: Patients and visitors should never be on the same network as your clinical computers.
+    citation: NIST SP 800-66r2 (Security Rule implementation guidance)
+    implementation: guidance
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: true
+    why: A shared or weakly protected network lets anyone nearby reach the computers that hold patient data.
+    fix: Ask your IT provider to set up WPA2/WPA3 on the staff network and a separate, isolated guest network.
+    fix_within_days: 30
+    last_reviewed: 2026-11-07
+
+  - id: TEC-009
+    text: Do you have a way to access patient data in an emergency if your normal logins or systems are unavailable?
+    help: For example, a documented break-glass admin account or vendor emergency procedure.
+    citation: 45 CFR 164.312(a)(2)(ii)
+    implementation: required
+    likelihood: 1
+    impact: 2
+    critical: false
+    allow_na: false
+    why: Patient care can be harmed if records are unreachable during an outage or lockout.
+    fix: Document an emergency access procedure with your EHR vendor and store it with your contingency plan.
+    fix_within_days: 60
+    last_reviewed: 2026-11-07
