@@ -307,3 +307,9 @@ input:focus-visible, .btn:focus-visible, a:focus-visible, summary:focus-visible 
   .print-tip { display: none !important; }
   a[href]::after { content: none !important; }
 }
+
+/* Keep short plan columns on one line */
+.report-table.plan th:nth-child(1), .report-table.plan td:nth-child(1),
+.report-table.plan th:nth-child(2), .report-table.plan td:nth-child(2),
+.report-table.plan th:nth-child(4), .report-table.plan td:nth-child(4) { white-space: nowrap; width: 1%; }
+.report-table.plan td:nth-child(5), .report-table.plan td:nth-child(6) { width: 13%; }

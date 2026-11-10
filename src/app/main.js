@@ -351,7 +351,7 @@ function viewReport() {
       ${
         rows
           ? `<p>Findings in priority order. Assign an owner and target date to each, and record completion.</p>
-        <table class="report-table plan"><thead><tr><th>#</th><th>Severity</th><th>Finding and remediation</th><th>Fix within</th><th>Owner</th><th>Done (date)</th></tr></thead><tbody>${rows}</tbody></table>`
+        <table class="report-table plan"><thead><tr><th>#</th><th>Severity</th><th>Finding and remediation</th><th>Due in</th><th>Owner</th><th>Done (date)</th></tr></thead><tbody>${rows}</tbody></table>`
           : '<p>No gaps were identified in the safeguards assessed.</p>'
       }
     </section>
