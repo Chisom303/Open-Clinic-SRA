@@ -1,81 +1,175 @@
 # Open Clinic SRA
 
-**A free, open-source HIPAA Security Risk Assessment for small clinics.**
+**A free HIPAA Security Risk Assessment built for small and rural medical practices.**
 
-**Try it:** https://chisom303.github.io/open-clinic-sra/
+Answer 38 plain-language questions in about 20–25 minutes. Get a risk rating,
+a prioritized action plan, and a signed report you can keep with your HIPAA
+records. No account, no cost, and your answers never leave your computer.
 
-Built for the practice manager at a 1–10 provider clinic, not for security
-engineers. Plain-language questions, a prioritized fix-it plan, and a report you
-can keep on file.
+### 👉 [Start your assessment](https://chisom303.github.io/open-clinic-sra/) · [See a sample report (PDF)](docs/sample-report.pdf)
 
-> ⚠️ Not legal advice and not a compliance certification. See [DISCLAIMER.md](DISCLAIMER.md).
+[![CI](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml/badge.svg)](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Status: public preview](https://img.shields.io/badge/status-public%20preview-orange.svg)
 
-## Why this exists
+> ⚠️ **Not legal advice and not a compliance certification.** This is a
+> structured self-assessment to support your practice's own risk analysis.
+> See [DISCLAIMER.md](DISCLAIMER.md).
 
-Small practices are required to perform a security risk analysis
-(45 CFR 164.308(a)(1)(ii)(A)), but most existing tools are either expensive
-consulting engagements, clunky spreadsheets, or developer-focused scanners.
-This project aims to be:
+![Results page showing an overall risk rating and a breakdown by section](docs/images/results.png)
 
-- **Free forever** — MIT-licensed code, CC BY 4.0 content.
-- **Private by design** — the app runs entirely in your browser. Answers never
-  leave your computer. There is no server to breach.
-- **Transparent** — every question cites the regulation it comes from, and the
-  scoring method is documented in [docs/methodology.md](docs/methodology.md).
-- **Actionable** — every "No" comes with why it matters, how to fix it, and a
-  suggested deadline.
-- **Forward-looking** — questions are flagged when the January 2025 proposed
-  Security Rule update would change their status (e.g., MFA and encryption
-  becoming required). That proposal is **not final law**.
+---
+
+## Who this is for
+
+- **Small practices** with 1–10 providers: family medicine, dental,
+  chiropractic, physical therapy, behavioral health, and similar clinics.
+- **Rural and independent practices** without a dedicated IT or compliance
+  team, where a consultant-led risk analysis is out of reach.
+- **IT providers and consultants** who support small practices and want a
+  free, transparent tool to run assessments with their clients.
+
+## Why it matters
+
+Every practice that handles electronic patient information must perform an
+accurate and thorough **security risk analysis**
+([45 CFR 164.308(a)(1)(ii)(A)](https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.308)).
+A missing or outdated risk analysis is one of the findings most often cited in
+HHS enforcement actions. Many small practices don't have one, because most
+options are either expensive or hard to use without an IT background.
+
+## What you get
+
+| | |
+|---|---|
+| **38 plain-language questions** | Written for a practice manager, not a security engineer. Each one explains what it means and why it matters. |
+| **A risk rating** | Low, Medium or High overall and for each area, based on how likely and how harmful each gap is. |
+| **A prioritized action plan** | Every gap comes with how to fix it and a suggested deadline. The most serious gaps come first. |
+| **A signed report** | Cover page, method, results, risk management plan, and attestation with signature lines. Print it or save it as a PDF. |
+| **Next year, update instead of restart** | Save your assessment as a file and load it next year to update it. |
+| **Free resources** | Links to free help from HHS and CISA for small practices. |
+
+### What it covers
+
+| Area | Examples |
+|---|---|
+| Administrative safeguards | Risk analysis, Security Officer, training, backups, staff offboarding |
+| Physical safeguards | Locked areas, screen privacy, device disposal, device inventory |
+| Technical safeguards | Unique logins, encryption, multi-factor authentication, patching, Wi-Fi |
+| Vendors and business associates | Business Associate Agreements with every vendor |
+| Policies and incident response | Incident response plan, breach notification |
+| Documentation | Written policies, 6-year record retention |
+| **AI tools** | AI scribes and coding tools, AI vendor agreements, staff use of public chatbots |
+
+![A question with its plain-language explanation, regulation citation and proposed-rule note](docs/images/question.png)
+
+## How to use it
+
+1. Open **https://chisom303.github.io/open-clinic-sra/** in any modern browser
+   (Chrome, Edge, Safari or Firefox) on a computer or tablet.
+2. Enter your practice name and start. Answer honestly; **Partially** and
+   **N/A** are available where they make sense.
+3. Review your results and action plan.
+4. Click **Open signed report**, then **Print or save as PDF**. Sign it and
+   store it with your HIPAA records for at least 6 years.
+5. Click **Save to file** so you can load and update it next year.
+
+You can stop at any time. Answers are saved in your browser, so you can come
+back later on the same computer.
 
 ## Privacy
 
-- **Your answers never leave your browser.** They are stored only on your
-  device, and reports are printed or saved as PDF on your own computer.
+- **Your answers never leave your browser.** The tool has no server and no
+  account. Answers are stored only on your device, and reports are printed or
+  saved as PDF on your own computer.
+- **Never enter patient information.** The tool asks about safeguards only.
 - **Anonymous usage counts.** To see how many practices use the tool, the site
   counts visits and a few steps (assessment started, completed, report printed,
   file saved or loaded, feedback clicked) using
   [GoatCounter](https://www.goatcounter.com), which does not use cookies or
   track individuals. Only fixed page and event names are sent, never answers,
   practice names, or anything you type. The allow-list is in
-  [`src/app/analytics.js`](src/app/analytics.js) and enforced by tests.
-- Like any website, the counter's server briefly receives your browser's
-  network address when it loads. Content blockers that block GoatCounter don't
-  affect how the tool works.
+  [`src/app/analytics.js`](src/app/analytics.js) and enforced by tests. Like any
+  website, the counter's server briefly receives your browser's network address
+  when it loads. Content blockers that block GoatCounter don't affect the tool.
+
+## How scoring works
+
+Each safeguard is weighted by **likelihood × impact**, a method consistent with
+NIST SP 800-30. Missing **critical** safeguards (risk analysis, tested backups,
+device encryption, multi-factor authentication, Business Associate Agreements,
+and an incident response plan) raise the overall rating to at least High.
+Every question cites the regulation or official guidance it comes from.
+
+Full details: [docs/methodology.md](docs/methodology.md).
+
+### About the proposed HIPAA Security Rule update
+
+HHS proposed major changes to the Security Rule in January 2025, including
+required multi-factor authentication and encryption. **That rule is not final.**
+The tool scores against the rule currently in force and flags questions the
+proposal would affect, so practices can prepare without over-investing in
+requirements that may still change.
+
+## How this compares to the official HHS SRA Tool
+
+HHS and ONC offer a free [Security Risk Assessment Tool](https://www.healthit.gov/topic/privacy-security-and-hipaa/security-risk-assessment-tool)
+for small and medium practices. It is more detailed, and we encourage practices
+to look at it. Open Clinic SRA is not affiliated with HHS. It aims to be a
+faster, plain-language starting point: it runs in a browser with nothing to
+install, produces a prioritized fix-it plan and a signed report, covers AI
+tools, and is open source so anyone can review or improve it.
+
+## For IT providers and consultants
+
+- Run the assessment with a client, then save the file and the signed report
+  to their records.
+- Mark yourself as **an outside consultant** on the start page; it appears on
+  the report.
+- The tool is MIT-licensed. You may use it with clients, including as part of
+  paid services. Contributions that improve accuracy are very welcome.
+
+## Feedback and help
+
+- **Did it help?** Use the **Share feedback** button on the results page, or
+  [open a feedback form](https://github.com/Chisom303/open-clinic-sra/issues/new?template=feedback.yml).
+  Please don't include patient information or details of specific security
+  weaknesses; GitHub issues are public.
+- **Found a wrong citation or unclear question?** See
+  [CONTRIBUTING.md](CONTRIBUTING.md). No coding needed.
+- **Security issue in the tool?** See [SECURITY.md](SECURITY.md).
 
 ## Project status
 
-🚧 Early development. Current milestone: **v0.1 — question bank + scoring engine**.
+**Public preview.** The question bank is a draft that is being reviewed by
+compliance professionals. Planned next:
 
-| Component | Status |
-|---|---|
-| Question schema + validation | ✅ |
-| Question bank (38 questions, incl. AI tools) | ✅ draft — needs expert review |
-| Scoring engine + tests | ✅ |
-| Browser questionnaire UI + results | ✅ |
-| Save/load assessment file | ✅ |
-| Printable signed report (save as PDF) | ✅ |
-| ePHI asset inventory section | ⏳ next |
+- [ ] Independent expert review of all questions and weights
+- [ ] ePHI asset inventory section
+- [ ] More questions toward full Security Rule coverage
+- [ ] Spanish translation
 
-## Repository layout
+If you are a HIPAA compliance professional, attorney, or auditor and are
+willing to review the question bank, please
+[get in touch](mailto:Aloziechisom23@gmail.com) or open an issue.
 
-```
-content/
-  sections.yaml        # assessment sections, in display order
-  questions/*.yaml     # one file per section
-  schema.json          # JSON Schema every question must satisfy
-src/
-  scoring.mjs          # scoring engine (pure functions, no I/O)
-  app/                 # browser app: screens, styles, local-only storage
-scripts/
-  validate.mjs         # validates all content against the schema
-test/
-  scoring.test.mjs     # unit tests for the scoring engine
-docs/
-  methodology.md       # how risk is calculated, in plain language
-```
+## About the maintainer
 
-## Getting started (developers)
+**Chisom Alozie** is an enterprise IT and cybersecurity practitioner and
+researcher. She spent her first nine years in IT support and engineering, and
+the last eight in cybersecurity and AI/ML consulting and research. She has
+published more than 40 academic papers, most of them on using machine learning
+and automation to detect threats and help organizations recover from attacks.
+
+She started Open Clinic SRA because small practices are held to the same HIPAA
+security rules as large hospitals, usually without an IT team or a compliance
+budget. A good risk assessment should not depend on the size of the practice.
+
+GitHub: [@Chisom303](https://github.com/Chisom303)
+
+---
+
+## For developers
 
 Requires Node.js 20+.
 
@@ -87,18 +181,24 @@ npm test           # run the tests
 npm run build      # build the static site into dist/
 ```
 
-## Publishing the app for free
+```
+content/
+  sections.yaml        # assessment sections, in display order
+  questions/*.yaml     # one file per section
+  schema.json          # JSON Schema every question must satisfy
+src/
+  scoring.mjs          # scoring engine (pure functions, no I/O)
+  app/                 # browser app: screens, styles, local-only storage, analytics allow-list
+scripts/
+  validate.mjs         # validates all content against the schema
+test/                  # scoring, import, and analytics tests
+docs/
+  methodology.md       # how risk is calculated, in plain language
+  sample-report.pdf    # sample report for a fictional practice
+```
 
-The included GitHub Actions workflow deploys the app to GitHub Pages on every
-push to `main`. In your repository, go to **Settings → Pages** and set
-**Source** to **GitHub Actions**. The site will appear at
-`https://<your-username>.github.io/<repo-name>/`.
-
-## Contributing
-
-Compliance professionals, practice managers, and developers are all welcome.
-You don't need to write code to improve the question bank — questions are
-plain YAML files. See [CONTRIBUTING.md](CONTRIBUTING.md).
+The app deploys to GitHub Pages automatically on every push to `main`
+(**Settings → Pages → Source: GitHub Actions**).
 
 ## License
 
