@@ -7,6 +7,7 @@ const bySection = Object.fromEntries(sections.map((s) => [s.id, questions.filter
 const main = document.getElementById('main');
 
 let state = loadSaved() ?? emptyAssessment();
+state.practice = { ...emptyAssessment().practice, ...state.practice };
 
 // ---------- helpers ----------
 const esc = (s) =>
@@ -15,6 +16,20 @@ const esc = (s) =>
 const LEVEL_LABEL = { low: 'Low risk', medium: 'Medium risk', high: 'High risk' };
 const ANSWER_LABEL = { yes: 'Yes', partial: 'Partially', no: 'No', na: 'N/A' };
 const SEVERITY_LABEL = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low' };
+const IMPLEMENTATION_TEXT = {
+  required: '<strong>Required</strong> under the current Security Rule: you must implement it.',
+  addressable:
+    '<strong>Addressable</strong> under the current Security Rule. This does not mean optional: you must implement it if it is reasonable and appropriate for your practice, or document why not and what equivalent measure you use instead.',
+  standard: '<strong>Standard</strong> under the current Security Rule: you must meet it.',
+  guidance: '<strong>Recommended practice</strong> from official HHS or NIST guidance that supports the Security Rule.',
+};
+const RESOURCES = [
+  ['HHS 405(d) Health Industry Cybersecurity Practices', 'https://405d.hhs.gov/', 'Free cybersecurity guidance written for small and medium healthcare practices.'],
+  ['Official HHS Security Risk Assessment Tool', 'https://www.healthit.gov/topic/privacy-security-and-hipaa/security-risk-assessment-tool', 'The free government tool. You can use it alongside or instead of this one.'],
+  ['CISA free vulnerability scanning', 'https://www.cisa.gov/cyber-hygiene-services', 'Free external scanning of your internet-facing systems, available to healthcare organizations.'],
+  ['CISA Known Exploited Vulnerabilities Catalog', 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog', 'Flaws attackers are actively using. Ask your IT provider to patch anything on this list first.'],
+  ['HHS Security Rule guidance', 'https://www.hhs.gov/hipaa/for-professionals/security/guidance/index.html', 'Official HHS guidance on risk analysis and the Security Rule.'],
+];
 
 const answeredIn = (sid) => bySection[sid].filter((q) => state.answers[q.id]).length;
 const totalAnswered = () => questions.filter((q) => state.answers[q.id]).length;
@@ -55,9 +70,9 @@ function viewWelcome() {
   <section class="hero">
     <p class="eyebrow">HIPAA Security Risk Assessment</p>
     <h1>Find and fix the security gaps in your practice.</h1>
-    <p class="lede">${questions.length} plain-language questions, about 20 minutes. You'll get a risk rating and a prioritized plan to fix what matters most.</p>
+    <p class="lede">${questions.length} plain-language questions, about 20–25 minutes. You'll get a risk rating and a prioritized plan to fix what matters most.</p>
     <ul class="assurances">
-      <li><strong>Private.</strong> Your answers are saved only in this browser. Nothing is sent anywhere.</li>
+      <li><strong>Private.</strong> 100% runs in your browser. Your answers are saved only on this device and are never sent to GitHub or any other server. Reports are printed or saved as PDF on your own computer.</li>
       <li><strong>Free.</strong> Open source, no account, no sign-up.</li>
       <li><strong>Transparent.</strong> Every question cites the HIPAA rule it comes from.</li>
     </ul>
@@ -70,6 +85,14 @@ function viewWelcome() {
     </label>
     <label>Completed by (name and role)
       <input name="assessor" maxlength="120" value="${esc(state.practice.assessor)}" placeholder="e.g. Jordan Lee, Practice Manager" />
+    </label>
+    <fieldset class="radio-row">
+      <legend>The person completing this is</legend>
+      <label><input type="radio" name="assessorType" value="internal" ${state.practice.assessorType === 'internal' ? 'checked' : ''} /> Practice staff</label>
+      <label><input type="radio" name="assessorType" value="external" ${state.practice.assessorType === 'external' ? 'checked' : ''} /> An outside consultant</label>
+    </fieldset>
+    <label>Security Officer (name and title) <span class="optional">optional</span>
+      <input name="securityOfficer" maxlength="120" value="${esc(state.practice.securityOfficer)}" placeholder="e.g. Dr. Sam Patel, Owner" />
     </label>
     <p class="warn">⚠️ Never enter patient names or any patient information. This tool asks only about your safeguards.</p>
     <div class="actions">
@@ -124,7 +147,8 @@ function questionCard(q, index) {
     <details class="more">
       <summary>Why this matters</summary>
       <p>${esc(q.why)}</p>
-      <p class="cite">Source: ${esc(q.citation)} · ${esc(q.implementation)}${q.critical ? ' · <strong>critical safeguard</strong>' : ''}</p>
+      <p class="cite">Source: ${esc(q.citation)}${q.critical ? ' · <strong>critical safeguard</strong>' : ''}</p>
+      <p class="impl">${IMPLEMENTATION_TEXT[q.implementation] ?? ''}</p>
       ${q.proposed_rule_2025?.affected ? `<p class="proposed"><strong>Proposed rule (not final):</strong> ${esc(q.proposed_rule_2025.note)}</p>` : ''}
     </details>
   </fieldset>`;
@@ -227,11 +251,129 @@ function viewResults() {
     <h2>Keep a record</h2>
     <p>HIPAA requires you to keep your risk analysis for at least 6 years. Save this assessment as a file and store it with your HIPAA documentation. Next year, load it to update rather than starting over.</p>
     <div class="actions">
-      <button class="btn primary" id="export">Save to file</button>
-      <button class="btn ghost" onclick="window.print()">Print</button>
+      <a class="btn primary" href="#/report">Open signed report (print or save as PDF)</a>
+      <button class="btn ghost" id="export">Save to file</button>
     </div>
     <p class="fine">This is a structured self-assessment, not legal advice and not a certification of HIPAA compliance. See the methodology and disclaimer in the project repository.</p>
+  </section>
+
+  ${resourcesCard()}`;
+}
+
+function resourcesCard() {
+  return `<section class="card">
+    <h2>Free help for small practices</h2>
+    <ul class="resources">
+      ${RESOURCES.map(([t, u, d]) => `<li><a href="${u}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a><span>${esc(d)}</span></li>`).join('')}
+    </ul>
   </section>`;
+}
+
+function viewReport() {
+  const r = scoreAssessment(questions, state.answers);
+  const fmt = (iso) => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const name = state.practice.name || '[Practice name not entered]';
+  const assessed = new Date(state.updatedAt);
+  const nextReview = new Date(assessed);
+  nextReview.setFullYear(nextReview.getFullYear() + 1);
+  const count = (sev) => r.findings.filter((f) => f.severity === sev).length;
+  const assessorType = { internal: 'Practice staff', external: 'Outside consultant' }[state.practice.assessorType] ?? '';
+  const rows = r.findings
+    .map(
+      (f, i) => `<tr>
+        <td class="num">${i + 1}</td>
+        <td><span class="badge ${f.severity}">${SEVERITY_LABEL[f.severity]}</span></td>
+        <td><strong>${esc(f.text)}</strong><br /><span class="cite">${esc(f.id)} · ${esc(f.citation)} · Answer: ${ANSWER_LABEL[f.answer]}</span><br />${esc(f.fix)}</td>
+        <td>${f.fix_within_days} days</td>
+        <td class="blank"></td>
+        <td class="blank"></td>
+      </tr>`,
+    )
+    .join('');
+  const sectionRows = sections
+    .map((s) => {
+      const sc = r.sections[s.id] ?? { ratio: 0, level: 'low', max: 0 };
+      const n = bySection[s.id].length;
+      const na = bySection[s.id].filter((q) => state.answers[q.id] === 'na').length;
+      return `<tr><th scope="row">${esc(s.title)}</th><td class="num">${n}</td><td class="num">${na}</td>
+        <td class="num">${sc.max ? `${Math.round(sc.ratio * 100)}%` : '—'}</td>
+        <td>${sc.max ? LEVEL_LABEL[sc.level] : 'Not assessed'}</td></tr>`;
+    })
+    .join('');
+
+  return `
+  <div class="report-toolbar">
+    <a class="btn ghost" href="#/results">← Back to results</a>
+    <button class="btn primary" onclick="window.print()">Print or save as PDF</button>
+  </div>
+  <p class="print-tip">Tip: in the print window, choose <strong>Save as PDF</strong> as the destination and turn off <strong>Headers and footers</strong> for a clean copy.</p>
+  ${!state.practice.name ? `<p class="notice">Add your practice name on the <a href="#/">start page</a> so it appears on the report.</p>` : ''}
+  ${!r.complete ? `<p class="notice">${r.unanswered.length} question(s) are unanswered. Complete the assessment before signing this report.</p>` : ''}
+
+  <article class="report">
+    <header class="report-cover">
+      <p class="confidential">Confidential — contains details of security safeguards</p>
+      <p class="eyebrow">HIPAA Security Rule · Security Risk Analysis</p>
+      <h1>${esc(name)}</h1>
+      <dl class="meta">
+        <div><dt>Assessment date</dt><dd>${esc(fmt(assessed))}</dd></div>
+        <div><dt>Next review due</dt><dd>${esc(fmt(nextReview))}</dd></div>
+        <div><dt>Completed by</dt><dd>${esc(state.practice.assessor || '—')}${assessorType ? `<br /><span class="cite">${assessorType}</span>` : ''}</dd></div>
+        <div><dt>Security Officer</dt><dd>${esc(state.practice.securityOfficer || '—')}</dd></div>
+        <div><dt>Overall risk</dt><dd><span class="badge ${r.level}">${LEVEL_LABEL[r.level]}</span><br /><span class="cite">${Math.round(r.ratio * 100)}% of measured risk remains (${+r.score.toFixed(1)} of ${r.max} points)</span></dd></div>
+        <div><dt>Findings</dt><dd>${r.findings.length} total<br /><span class="cite">${count('critical')} critical · ${count('high')} high · ${count('medium')} medium · ${count('low')} low</span></dd></div>
+      </dl>
+      <div class="fill-in">
+        <div><span class="line"></span>Practice address</div>
+        <div><span class="line"></span>NPI (optional)</div>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. Scope and method</h2>
+      <p>This analysis covers the practice's administrative, physical, and technical safeguards for electronic protected health information (ePHI), including AI tools that access ePHI, as required by 45 CFR 164.308(a)(1)(ii)(A). ${questions.length} safeguards were assessed.</p>
+      <ul class="method">
+        <li><strong>Sources:</strong> HIPAA Security Rule (45 CFR Part 164, Subpart C) as currently in force; Breach Notification Rule (45 CFR 164.404); NIST SP 800-30 Rev. 1 (risk assessment method); NIST SP 800-66 Rev. 2 (Security Rule implementation guidance).</li>
+        <li><strong>Risk per safeguard:</strong> likelihood (1–3) × impact (1–3), from 1 to 9 points. Yes leaves 0% of that risk, Partially 50%, No 100%. N/A answers are excluded.</li>
+        <li><strong>Overall rating:</strong> remaining risk as a share of the maximum. Below 15% Low, 15–39% Medium, 40% or more High. Any critical safeguard answered No raises the rating to at least High; Partially, to at least Medium.</li>
+        <li><strong>Critical safeguards:</strong> risk analysis, tested backups, device encryption, multi-factor authentication, Business Associate Agreements, and an incident response plan.</li>
+        <li><strong>Proposed rule:</strong> notes on the January 2025 proposed Security Rule are informational only; that rule is not final and is not scored.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Results by area</h2>
+      <table class="report-table"><thead><tr><th>Area</th><th>Questions</th><th>N/A</th><th>Risk remaining</th><th>Rating</th></tr></thead><tbody>${sectionRows}</tbody></table>
+    </section>
+
+    <section>
+      <h2>3. Risk management plan</h2>
+      ${
+        rows
+          ? `<p>Findings in priority order. Assign an owner and target date to each, and record completion.</p>
+        <table class="report-table plan"><thead><tr><th>#</th><th>Severity</th><th>Finding and remediation</th><th>Fix within</th><th>Owner</th><th>Done (date)</th></tr></thead><tbody>${rows}</tbody></table>`
+          : '<p>No gaps were identified in the safeguards assessed.</p>'
+      }
+    </section>
+
+    <section class="signoff">
+      <h2>4. Review and approval</h2>
+      <p>I attest that the information in this assessment is true and complete to the best of my knowledge, that I have reviewed the risk management plan above, and that this assessment will be retained for at least six years as required by 45 CFR 164.316(b)(2)(i).</p>
+      <div class="sig-grid">
+        <div><span class="line"></span>Security Officer — printed name</div>
+        <div><span class="line"></span>Signature</div>
+        <div><span class="line"></span>Date</div>
+        <div><span class="line"></span>Practice owner / administrator — printed name</div>
+        <div><span class="line"></span>Signature</div>
+        <div><span class="line"></span>Date</div>
+      </div>
+      <p>Next review due: within 12 months of the date above, or sooner after a major change or security incident.</p>
+    </section>
+
+    <footer class="report-foot">
+      Prepared with Open Clinic SRA, a free open-source tool. This report is a structured self-assessment to support the practice's HIPAA risk analysis. It is not legal advice and does not certify HIPAA compliance. Keep this report for at least 6 years (45 CFR 164.316(b)(2)).
+    </footer>
+  </article>`;
 }
 
 // ---------- render + events ----------
@@ -240,6 +382,7 @@ function render() {
   const [, route, param] = hash.split('/');
   if (route === 'section') main.innerHTML = viewSection(param);
   else if (route === 'results') main.innerHTML = viewResults();
+  else if (route === 'report') main.innerHTML = viewReport();
   else main.innerHTML = viewWelcome();
   main.focus({ preventScroll: true });
   window.scrollTo(0, 0);
@@ -251,6 +394,8 @@ main.addEventListener('submit', (e) => {
   const fd = new FormData(e.target);
   state.practice.name = String(fd.get('name') || '').trim();
   state.practice.assessor = String(fd.get('assessor') || '').trim();
+  state.practice.securityOfficer = String(fd.get('securityOfficer') || '').trim();
+  state.practice.assessorType = String(fd.get('assessorType') || '');
   persist();
   const firstOpen = sections.find((s) => answeredIn(s.id) < bySection[s.id].length) ?? sections[0];
   go(`#/section/${firstOpen.id}`);

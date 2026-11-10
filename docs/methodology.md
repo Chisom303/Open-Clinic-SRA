@@ -57,13 +57,35 @@ risk regardless of how well it does elsewhere. These are marked `critical`:
 If any critical question is answered **No**, the overall rating is at least
 **High**. If any is answered **Partially**, the rating is at least **Medium**.
 
-## 5. Prioritized remediation
+## 5. Required vs. addressable
+
+Each question shows how the **current, in-force** Security Rule treats the safeguard:
+
+- **Required / Standard:** must be implemented.
+- **Addressable:** *not* optional. The practice must implement it if reasonable
+  and appropriate, or document why not and what equivalent measure it uses
+  instead (45 CFR 164.306(d)).
+- **Recommended practice:** supported by official HHS or NIST guidance.
+
+The January 2025 proposed rule would remove most of the addressable
+distinction. Until a final rule is published, the tool notes this as
+information only and does not score against it.
+
+## 6. Prioritized remediation
 
 Every gap becomes a finding in the remediation plan, ordered by:
 
 1. Critical findings first
 2. Then highest remaining risk
 3. Then shortest suggested deadline
+
+## 7. AI tools
+
+The AI Tools section asks about AI scribes, coding assistants, chatbots and
+similar tools that can access patient information. These are scored like any
+other safeguard: they rest on existing rules for risk analysis, Business
+Associate Agreements, and integrity of ePHI, and HHS has proposed that AI tools
+be explicitly included in the asset inventory and risk analysis.
 
 ## Limitations
 

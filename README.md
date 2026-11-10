@@ -2,7 +2,7 @@
 
 **A free, open-source HIPAA Security Risk Assessment for small clinics.**
 
-   **Try it:** https://chisom303.github.io/open-clinic-sra/
+**Try it:** https://chisom303.github.io/open-clinic-sra/
 
 Built for the practice manager at a 1–10 provider clinic, not for security
 engineers. Plain-language questions, a prioritized fix-it plan, and a report you
@@ -35,12 +35,12 @@ This project aims to be:
 | Component | Status |
 |---|---|
 | Question schema + validation | ✅ |
-| Question bank (first 32 questions) | ✅ draft — needs expert review |
+| Question bank (38 questions, incl. AI tools) | ✅ draft — needs expert review |
 | Scoring engine + tests | ✅ |
 | Browser questionnaire UI + results | ✅ |
 | Save/load assessment file | ✅ |
-| PDF report | ⏳ next |
-| ePHI asset inventory section | ⏳ |
+| Printable signed report (save as PDF) | ✅ |
+| ePHI asset inventory section | ⏳ next |
 
 ## Repository layout
 

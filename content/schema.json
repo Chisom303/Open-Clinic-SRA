@@ -25,7 +25,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^(ADM|PHY|TEC|ORG|POL|DOC|INV)-[0-9]{3}$",
+          "pattern": "^(ADM|PHY|TEC|ORG|POL|DOC|INV|AI)-[0-9]{3}$",
           "description": "Permanent ID. Never reuse or renumber."
         },
         "text": { "type": "string", "minLength": 10, "maxLength": 240 },

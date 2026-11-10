@@ -6,7 +6,7 @@ export function emptyAssessment() {
   return {
     format: 'open-clinic-sra',
     version: FORMAT_VERSION,
-    practice: { name: '', assessor: '' },
+    practice: { name: '', assessor: '', securityOfficer: '', assessorType: '' },
     startedAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     answers: {},
@@ -84,7 +84,12 @@ export function parseImport(text, questions) {
   return {
     state: {
       ...emptyAssessment(),
-      practice: { name: str(data.practice?.name), assessor: str(data.practice?.assessor) },
+      practice: {
+        name: str(data.practice?.name),
+        assessor: str(data.practice?.assessor),
+        securityOfficer: str(data.practice?.securityOfficer),
+        assessorType: ['internal', 'external'].includes(data.practice?.assessorType) ? data.practice.assessorType : '',
+      },
       startedAt: str(data.startedAt) || new Date().toISOString(),
       answers,
     },

@@ -25,3 +25,7 @@ sections:
     title: Documentation
     description: Keeping the records HIPAA requires, for as long as it requires them.
     file: documentation.yaml
+  - id: ai
+    title: AI Tools
+    description: AI scribes, coding assistants, chatbots, and other AI tools that can see patient information.
+    file: ai.yaml

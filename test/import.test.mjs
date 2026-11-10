@@ -36,3 +36,12 @@ test('long practice names are truncated', () => {
   const { state } = parseImport(file({ practice: { name: 'x'.repeat(500) } }), questions);
   assert.equal(state.practice.name.length, 120);
 });
+
+test('practice details are sanitized on import', () => {
+  const { state } = parseImport(
+    file({ practice: { name: 'A', securityOfficer: 'Dr. B', assessorType: 'hacker' } }),
+    questions,
+  );
+  assert.equal(state.practice.securityOfficer, 'Dr. B');
+  assert.equal(state.practice.assessorType, '');
+});

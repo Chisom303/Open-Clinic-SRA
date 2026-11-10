@@ -1,0 +1,88 @@
+section: ai
+questions:
+  - id: AI-001
+    text: Do you keep a list of every AI tool your practice uses that can see patient information?
+    help: Include AI scribes and documentation tools, coding or billing assistants, AI phone or scheduling agents, and AI features built into your EHR. Choose N/A only if no AI tool touches patient information.
+    citation: 45 CFR 164.308(a)(1)(ii)(A)
+    implementation: required
+    proposed_rule_2025:
+      affected: true
+      note: HHS stated in the proposal that the technology asset inventory and risk analysis would need to cover AI tools that create, receive, maintain, or transmit ePHI.
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: true
+    why: Your risk analysis must cover every place patient information goes. AI tools are often added by individual providers and missed.
+    fix: List each AI tool, the vendor, what patient information it sees, and who uses it. Add it to your device and vendor lists and review it at each risk analysis.
+    fix_within_days: 30
+    last_reviewed: 2026-11-08
+
+  - id: AI-002
+    text: Do you have a signed Business Associate Agreement (BAA) with every AI vendor whose tool handles patient information?
+    help: An AI scribe that records visits or a tool that reads charts to suggest billing codes is a business associate. A free or consumer version of an AI tool usually comes with no BAA.
+    citation: 45 CFR 164.308(b)(1)
+    implementation: standard
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: true
+    why: Sending patient information to a vendor without a BAA is itself a HIPAA violation, whether or not the vendor uses AI.
+    fix: Ask each AI vendor for a BAA before using the tool with patients. Stop using any tool whose vendor will not sign one.
+    fix_within_days: 14
+    last_reviewed: 2026-11-08
+
+  - id: AI-003
+    text: Do you know whether each AI vendor can use your patients' information to train its models, and how long it keeps the data?
+    help: Check the BAA and the vendor's terms. Many enterprise healthcare AI products exclude training on customer data; consumer products often do not.
+    citation: 45 CFR 164.504(e)(2)
+    implementation: required
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: true
+    why: A business associate may use patient information only as your agreement permits. Unclear terms can let data be reused or kept longer than you expect.
+    fix: Get written answers from each AI vendor on model training, data retention, and deletion, and make sure the BAA reflects them.
+    fix_within_days: 30
+    last_reviewed: 2026-11-08
+
+  - id: AI-004
+    text: Does a clinician review AI-generated notes, summaries, or codes before they are saved to the record or billed?
+    help: AI scribes and coding tools can make mistakes, such as wrong medications, invented findings, or the wrong patient.
+    citation: 45 CFR 164.312(c)(1)
+    implementation: standard
+    likelihood: 2
+    impact: 2
+    critical: false
+    allow_na: true
+    why: HIPAA requires protecting patient information from improper alteration. Unreviewed AI output can put inaccurate information into the medical record.
+    fix: Require the treating clinician to review and sign AI-generated documentation before it is final, and include this in your AI policy and training.
+    fix_within_days: 30
+    last_reviewed: 2026-11-08
+
+  - id: AI-005
+    text: Do you have a written rule that staff may not enter patient information into public AI chatbots or other AI tools the practice has not approved?
+    help: For example, pasting a patient's note into a free chatbot to draft a letter. This applies even if your practice has not adopted any AI tools.
+    citation: 45 CFR 164.308(a)(1)(ii)(B)
+    implementation: required
+    likelihood: 3
+    impact: 3
+    critical: false
+    allow_na: false
+    why: Staff using free AI tools on their own is a common, hard-to-see way patient information leaves the practice without a BAA.
+    fix: Add a short AI use policy listing approved tools, ban unapproved tools for patient information, and cover it in annual training.
+    fix_within_days: 30
+    last_reviewed: 2026-11-08
+
+  - id: AI-006
+    text: Does your incident response plan cover problems with AI tools, such as an AI vendor breach or an AI tool exposing patient information?
+    help: For example, who can switch off the AI tool, how to reach the vendor's security team, and how to find out which patients were affected.
+    citation: 45 CFR 164.308(a)(6)(ii)
+    implementation: required
+    likelihood: 2
+    impact: 3
+    critical: false
+    allow_na: true
+    why: AI tools add new ways for patient information to leak, and a vendor breach can affect many patients at once. A plan written before AI was adopted may not cover them.
+    fix: Add an AI section to your incident response plan, covering how to disable each AI tool, the vendor's security contact, how to preserve logs, and notifying the Security Officer right away. Review it with your annual plan test.
+    fix_within_days: 30
+    last_reviewed: 2026-11-08
