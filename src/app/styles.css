@@ -288,7 +288,7 @@ input:focus-visible, .btn:focus-visible, a:focus-visible, summary:focus-visible 
   .report-toolbar { display: none !important; }
   .report { border: none; padding: 0; max-width: none; }
   .report-table { display: table; }
-  @page { margin: 16mm; }
+  @page { size: portrait; margin: 16mm; }
 }
 
 /* Report additions */
