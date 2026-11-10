@@ -28,6 +28,21 @@ This project aims to be:
   Security Rule update would change their status (e.g., MFA and encryption
   becoming required). That proposal is **not final law**.
 
+## Privacy
+
+- **Your answers never leave your browser.** They are stored only on your
+  device, and reports are printed or saved as PDF on your own computer.
+- **Anonymous usage counts.** To see how many practices use the tool, the site
+  counts visits and a few steps (assessment started, completed, report printed,
+  file saved or loaded, feedback clicked) using
+  [GoatCounter](https://www.goatcounter.com), which does not use cookies or
+  track individuals. Only fixed page and event names are sent, never answers,
+  practice names, or anything you type. The allow-list is in
+  [`src/app/analytics.js`](src/app/analytics.js) and enforced by tests.
+- Like any website, the counter's server briefly receives your browser's
+  network address when it loads. Content blockers that block GoatCounter don't
+  affect how the tool works.
+
 ## Project status
 
 🚧 Early development. Current milestone: **v0.1 — question bank + scoring engine**.

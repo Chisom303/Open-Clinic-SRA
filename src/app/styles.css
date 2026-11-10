@@ -313,3 +313,6 @@ input:focus-visible, .btn:focus-visible, a:focus-visible, summary:focus-visible 
 .report-table.plan th:nth-child(2), .report-table.plan td:nth-child(2),
 .report-table.plan th:nth-child(4), .report-table.plan td:nth-child(4) { white-space: nowrap; width: 1%; }
 .report-table.plan td:nth-child(5), .report-table.plan td:nth-child(6) { width: 13%; }
+
+.feedback { border-color: var(--brand); }
+@media print { .feedback { display: none !important; } }

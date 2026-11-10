@@ -1,6 +1,10 @@
 import content from '../generated/content.json';
 import { scoreAssessment } from '../scoring.mjs';
 import { emptyAssessment, loadSaved, save, clearSaved, exportFile, parseImport } from './storage.js';
+import { trackPage, trackEvent, EVENTS } from './analytics.js';
+
+const FEEDBACK_URL = 'https://github.com/Chisom303/open-clinic-sra/issues/new?template=feedback.yml';
+const FEEDBACK_EMAIL = 'Aloziechisom23@gmail.com';
 
 const { sections, questions } = content;
 const bySection = Object.fromEntries(sections.map((s) => [s.id, questions.filter((q) => q.section === s.id)]));
@@ -72,7 +76,7 @@ function viewWelcome() {
     <h1>Find and fix the security gaps in your practice.</h1>
     <p class="lede">${questions.length} plain-language questions, about 20–25 minutes. You'll get a risk rating and a prioritized plan to fix what matters most.</p>
     <ul class="assurances">
-      <li><strong>Private.</strong> 100% runs in your browser. Your answers are saved only on this device and are never sent to GitHub or any other server. Reports are printed or saved as PDF on your own computer.</li>
+      <li><strong>Private.</strong> 100% runs in your browser. Your answers are saved only on this device and are never sent to GitHub or any other server. Reports are printed or saved as PDF on your own computer. To see how many practices use the tool, we count anonymous visits and steps (like "report printed") without cookies; your answers and practice details are never included.</li>
       <li><strong>Free.</strong> Open source, no account, no sign-up.</li>
       <li><strong>Transparent.</strong> Every question cites the HIPAA rule it comes from.</li>
     </ul>
@@ -257,6 +261,15 @@ function viewResults() {
     <p class="fine">This is a structured self-assessment, not legal advice and not a certification of HIPAA compliance. See the methodology and disclaimer in the project repository.</p>
   </section>
 
+  <section class="card feedback">
+    <h2>Did this help?</h2>
+    <p>This free tool improves with feedback from practices and IT providers. Tell us what worked, what was confusing, or what's missing. Please don't include patient information.</p>
+    <div class="actions">
+      <a class="btn ghost" id="feedback" href="${FEEDBACK_URL}" target="_blank" rel="noopener noreferrer">Share feedback on GitHub ↗</a>
+      <a class="btn link" id="feedback-email" href="mailto:${FEEDBACK_EMAIL}?subject=Open%20Clinic%20SRA%20feedback">Or send an email</a>
+    </div>
+  </section>
+
   ${resourcesCard()}`;
 }
 
@@ -384,6 +397,7 @@ function render() {
   else if (route === 'results') main.innerHTML = viewResults();
   else if (route === 'report') main.innerHTML = viewReport();
   else main.innerHTML = viewWelcome();
+  trackPage(route === 'section' ? `/section/${param}` : route === 'results' || route === 'report' ? `/${route}` : '/');
   main.focus({ preventScroll: true });
   window.scrollTo(0, 0);
 }
@@ -397,6 +411,7 @@ main.addEventListener('submit', (e) => {
   state.practice.securityOfficer = String(fd.get('securityOfficer') || '').trim();
   state.practice.assessorType = String(fd.get('assessorType') || '');
   persist();
+  trackEvent(EVENTS.started, { once: true });
   const firstOpen = sections.find((s) => answeredIn(s.id) < bySection[s.id].length) ?? sections[0];
   go(`#/section/${firstOpen.id}`);
 });
@@ -406,6 +421,7 @@ main.addEventListener('change', async (e) => {
   if (t.type === 'radio' && t.closest('#answers')) {
     state.answers[t.name] = t.value;
     persist();
+    if (totalAnswered() === questions.length) trackEvent(EVENTS.completed, { once: true });
     t.closest('.question').classList.add('answered');
     // Update nav counts and progress without re-rendering (keeps focus on the radio).
     const nav = document.querySelector('.section-nav');
@@ -420,6 +436,7 @@ main.addEventListener('change', async (e) => {
       const { state: imported, dropped } = parseImport(await t.files[0].text(), questions);
       state = imported;
       persist();
+      trackEvent(EVENTS.fileLoaded);
       showToast(`Loaded ${Object.keys(state.answers).length} answers${dropped ? ` (${dropped} outdated answers skipped)` : ''}.`);
       render();
     } catch (err) {
@@ -431,8 +448,10 @@ main.addEventListener('change', async (e) => {
 main.addEventListener('click', (e) => {
   if (e.target.id === 'export') {
     exportFile(state);
+    trackEvent(EVENTS.fileSaved);
     showToast('Saved. Store this file with your HIPAA records.');
   }
+  if (e.target.id === 'feedback' || e.target.id === 'feedback-email') trackEvent(EVENTS.feedbackClicked);
   if (e.target.id === 'reset') {
     if (confirm('Erase all answers saved on this device? Save to file first if you want to keep them.')) {
       clearSaved();
@@ -443,4 +462,8 @@ main.addEventListener('click', (e) => {
 });
 
 window.addEventListener('hashchange', render);
+// Counts printing from the report page, whether via the button or Ctrl+P.
+window.addEventListener('beforeprint', () => {
+  if ((location.hash || '').startsWith('#/report')) trackEvent(EVENTS.reportPrinted);
+});
 render();

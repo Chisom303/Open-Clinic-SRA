@@ -1,0 +1,43 @@
+name: Feedback
+description: Tell us how the assessment worked for your practice. No coding or technical knowledge needed.
+labels: [feedback]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for trying Open Clinic SRA! **Please do not include any patient information, or details of specific security weaknesses at your practice.** This page is public.
+  - type: dropdown
+    id: role
+    attributes:
+      label: Who are you?
+      options:
+        - Practice manager / clinic staff
+        - Physician / practice owner
+        - IT provider / MSP
+        - Compliance professional or consultant
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: helpful
+    attributes:
+      label: Was the assessment helpful?
+      options:
+        - Very helpful
+        - Somewhat helpful
+        - Not helpful
+    validations:
+      required: true
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked well?
+  - type: textarea
+    id: confusing
+    attributes:
+      label: What was confusing or missing?
+  - type: input
+    id: size
+    attributes:
+      label: Practice size (optional)
+      description: e.g. "3 providers, 12 staff"
