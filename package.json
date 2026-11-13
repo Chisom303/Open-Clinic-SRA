@@ -1,6 +1,6 @@
 {
   "name": "open-clinic-sra",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Free, open-source HIPAA Security Risk Assessment for small clinics. Runs entirely in the browser.",
   "license": "MIT",
   "type": "module",

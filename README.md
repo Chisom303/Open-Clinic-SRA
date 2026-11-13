@@ -153,6 +153,18 @@ If you are a HIPAA compliance professional, attorney, or auditor and are
 willing to review the question bank, please
 [get in touch](mailto:Aloziechisom23@gmail.com) or open an issue.
 
+## How to cite
+
+If you use or refer to Open Clinic SRA in research, training, or publications,
+please cite it. Click **Cite this repository** on the right side of the GitHub
+page for APA and BibTeX formats, or use:
+
+> Alozie, C. (2026). *Open Clinic SRA: A free, open-source HIPAA Security Risk
+> Assessment for small and rural medical practices* (Version 0.2.0) [Computer
+> software]. https://github.com/Chisom303/open-clinic-sra
+
+Citation details are kept in [CITATION.cff](CITATION.cff).
+
 ## About the maintainer
 
 **Chisom Alozie** is an enterprise IT and cybersecurity practitioner and

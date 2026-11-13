@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use or refer to Open Clinic SRA, please cite it using the metadata below."
+type: software
+title: "Open Clinic SRA: A free, open-source HIPAA Security Risk Assessment for small and rural medical practices"
+abstract: >-
+  Open Clinic SRA is a browser-based HIPAA Security Risk Assessment tool for
+  small and rural medical practices. It presents plain-language questions
+  derived from the HIPAA Security Rule (45 CFR Part 164, Subpart C), scores
+  risk using a likelihood-times-impact method consistent with NIST SP 800-30,
+  produces a prioritized remediation plan and a signed report, and covers AI
+  tools that access electronic protected health information. All answers stay
+  in the user's browser.
+authors:
+  - given-names: Chisom
+    family-names: Alozie
+version: 0.2.0
+date-released: "2026-11-13"
+license: MIT
+repository-code: "https://github.com/Chisom303/open-clinic-sra"
+url: "https://chisom303.github.io/open-clinic-sra/"
+keywords:
+  - HIPAA
+  - security risk assessment
+  - healthcare cybersecurity
+  - small medical practices
+  - rural health
+  - NIST SP 800-30
+  - open source
