@@ -10,7 +10,7 @@ records. No account, no cost, and your answers never leave your computer.
 
 [![CI](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml/badge.svg)](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-![Status: public preview](https://img.shields.io/badge/status-public%20preview-orange.svg)
+![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-blue.svg)
 
 > ⚠️ **Not legal advice and not a compliance certification.** This is a
 > structured self-assessment to support your practice's own risk analysis.
@@ -141,8 +141,9 @@ tools, and is open source so anyone can review or improve it.
 
 ## Project status
 
-**Public preview.** The question bank is a draft that is being reviewed by
-compliance professionals. Planned next:
+**Version 1.0.** The assessment, scoring, and report are complete and tested.
+The question bank is awaiting independent review by compliance professionals,
+and updates from that review will be released as new versions. Planned next:
 
 - [ ] Independent expert review of all questions and weights
 - [ ] ePHI asset inventory section
@@ -160,7 +161,7 @@ please cite it. Click **Cite this repository** on the right side of the GitHub
 page for APA and BibTeX formats, or use:
 
 > Alozie, C. (2026). *Open Clinic SRA: A free, open-source HIPAA Security Risk
-> Assessment for small and rural medical practices* (Version 0.2.0) [Computer
+> Assessment for small and rural medical practices* (Version 1.0.0) [Computer
 > software]. https://github.com/Chisom303/open-clinic-sra
 
 Citation details are kept in [CITATION.cff](CITATION.cff).
