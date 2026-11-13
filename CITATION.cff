@@ -14,8 +14,13 @@ authors:
   - given-names: Chisom
     family-names: Alozie
 version: 1.0.0
+doi: 10.5281/zenodo.24206639
 date-released: "2026-11-13"
 license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24206639
+    description: Zenodo DOI for all versions of Open Clinic SRA
 repository-code: "https://github.com/Chisom303/open-clinic-sra"
 url: "https://chisom303.github.io/open-clinic-sra/"
 keywords:

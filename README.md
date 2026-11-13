@@ -11,6 +11,7 @@ records. No account, no cost, and your answers never leave your computer.
 [![CI](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml/badge.svg)](https://github.com/Chisom303/open-clinic-sra/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-blue.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24206639.svg)](https://doi.org/10.5281/zenodo.24206639)
 
 > ⚠️ **Not legal advice and not a compliance certification.** This is a
 > structured self-assessment to support your practice's own risk analysis.
@@ -162,7 +163,7 @@ page for APA and BibTeX formats, or use:
 
 > Alozie, C. (2026). *Open Clinic SRA: A free, open-source HIPAA Security Risk
 > Assessment for small and rural medical practices* (Version 1.0.0) [Computer
-> software]. https://github.com/Chisom303/open-clinic-sra
+> software]. Zenodo. https://doi.org/10.5281/zenodo.24206639
 
 Citation details are kept in [CITATION.cff](CITATION.cff).
 
